@@ -1,0 +1,172 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply box-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-sonyduck-dark text-text-white font-sans antialiased;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Custom scrollbar - darker theme */
+  ::-webkit-scrollbar {
+    @apply w-2;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-sonyduck-lighter rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-sonyduck-red/50;
+  }
+
+  /* Selection color */
+  ::selection {
+    @apply bg-sonyduck-red/40 text-white;
+  }
+}
+
+@layer components {
+  /* Primary Button - Red accent */
+  .btn-primary {
+    @apply bg-sonyduck-red text-white font-bold px-6 py-3 rounded-full 
+           hover:bg-sonyduck-red-hover hover:shadow-red-glow
+           transition-all duration-200 active:scale-95 
+           disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  /* Secondary Button */
+  .btn-secondary {
+    @apply bg-transparent border-2 border-sonyduck-red text-sonyduck-red font-bold 
+           px-6 py-3 rounded-full hover:bg-sonyduck-red hover:text-white
+           transition-all duration-200 active:scale-95;
+  }
+
+  /* Ghost Button */
+  .btn-ghost {
+    @apply bg-transparent text-text-light p-2 rounded-full 
+           hover:bg-sonyduck-light hover:text-white transition-colors duration-200;
+  }
+
+  /* Icon Button - Red accent when active */
+  .btn-icon {
+    @apply p-3 bg-sonyduck-red text-white rounded-full 
+           hover:bg-sonyduck-red-hover hover:shadow-red-glow
+           transition-all duration-200 active:scale-95;
+  }
+
+  .btn-icon-sm {
+    @apply p-2 bg-sonyduck-light text-text-light rounded-full 
+           hover:bg-sonyduck-lighter hover:text-white transition-all duration-200;
+  }
+
+  /* Cards */
+  .card {
+    @apply bg-sonyduck-medium p-4 rounded-lg transition-all duration-200;
+  }
+
+  .card-hover {
+    @apply hover:bg-sonyduck-light hover:scale-[1.02] cursor-pointer;
+  }
+
+  /* Input fields */
+  .input {
+    @apply w-full bg-sonyduck-light text-text-white px-4 py-3 rounded-md
+           border-2 border-transparent focus:border-sonyduck-red 
+           focus:outline-none transition-all duration-200
+           placeholder:text-text-subtle;
+  }
+
+  /* Skeleton loading */
+  .skeleton {
+    @apply bg-gradient-to-r from-sonyduck-light via-sonyduck-lighter to-sonyduck-light
+           bg-[length:200%_100%] animate-shimmer rounded;
+  }
+
+  /* Gradient backgrounds */
+  .gradient-hero {
+    background: linear-gradient(180deg, #2A1A1A 0%, #121212 100%);
+  }
+
+  .gradient-red {
+    background: linear-gradient(135deg, #C62828 0%, #E53935 50%, #FF5252 100%);
+  }
+
+  /* Glow effects */
+  .glow-red {
+    box-shadow: 0 0 20px rgba(229, 57, 53, 0.4);
+  }
+
+  .glow-red-sm {
+    box-shadow: 0 0 10px rgba(229, 57, 53, 0.3);
+  }
+
+  /* Text gradient */
+  .text-gradient-red {
+    @apply bg-gradient-to-r from-sonyduck-red to-sonyduck-red-hover bg-clip-text text-transparent;
+  }
+
+  /* Album art shadow */
+  .album-shadow {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  }
+
+  /* Playing indicator */
+  .playing-indicator {
+    @apply flex gap-0.5 items-end h-4;
+  }
+
+  .playing-indicator span {
+    @apply w-1 bg-sonyduck-red rounded-full;
+    animation: playing-bar 0.8s ease-in-out infinite;
+  }
+
+  .playing-indicator span:nth-child(1) { animation-delay: 0s; height: 60%; }
+  .playing-indicator span:nth-child(2) { animation-delay: 0.2s; height: 100%; }
+  .playing-indicator span:nth-child(3) { animation-delay: 0.4s; height: 40%; }
+  .playing-indicator span:nth-child(4) { animation-delay: 0.6s; height: 80%; }
+
+  @keyframes playing-bar {
+    0%, 100% { transform: scaleY(0.5); }
+    50% { transform: scaleY(1); }
+  }
+
+  /* Visualizer bars */
+  .visualizer {
+    @apply flex items-end gap-0.5 h-8;
+  }
+
+  .visualizer-bar {
+    @apply w-1 bg-sonyduck-red rounded-full transition-all duration-75;
+  }
+}
+
+/* Hide scrollbar for horizontal scroll */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Focus styles */
+.focus-red {
+  @apply focus:outline-none focus:ring-2 focus:ring-sonyduck-red focus:ring-offset-2 focus:ring-offset-sonyduck-dark;
+}
