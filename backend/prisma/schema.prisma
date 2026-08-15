@@ -1,0 +1,202 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  password      String
+  name          String
+  avatar        String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  // AI Profile
+  topGenres    String    @default("[]")
+  moodPreference String   @default("neutral")
+  preferredDecade String? @default("2020s")
+  energyPreference Float  @default(0.5)
+  
+  // Listening Stats
+  totalMinutesListened Int @default(0)
+  totalSongsPlayed    Int  @default(0)
+  
+  refreshToken String? // Token de refresco JWT
+
+  playlists         Playlist[]
+  likedSongs        LikedSong[]
+  followedArtists   ArtistFollow[]
+  listeningHistory  ListeningSession[]
+  smartPlaylists  SmartPlaylist[]
+
+  @@map("users")
+}
+
+model Artist {
+  id              String    @id @default(cuid())
+  name            String
+  imageUrl        String?
+  bio             String?
+  genres          String    @default("[]")
+  monthlyListeners Int      @default(0)
+  createdAt       DateTime  @default(now())
+
+  albums          Album[]
+  songs           Song[]
+  followers       ArtistFollow[]
+
+  @@map("artists")
+}
+
+model Album {
+  id          String    @id @default(cuid())
+  title       String
+  coverUrl    String?
+  releaseYear Int
+  type        String   @default("ALBUM")
+  createdAt   DateTime  @default(now())
+
+  artist      Artist    @relation(fields: [artistId], references: [id])
+  artistId    String
+  songs       Song[]
+
+  @@map("albums")
+}
+
+model Song {
+  id          String    @id @default(cuid())
+  title       String
+  duration    Int       // seconds
+  trackNumber Int       @default(1)
+  audioUrl    String
+  createdAt   DateTime  @default(now())
+
+  album       Album     @relation(fields: [albumId], references: [id])
+  albumId     String
+  artist      Artist    @relation(fields: [artistId], references: [id])
+  artistId    String
+
+  // AI Features
+  tempo        Float   @default(120)     // BPM
+  energy      Float   @default(0.5)    // 0-1
+  danceability Float  @default(0.5)    // 0-1
+  valence     Float   @default(0.5)    // 0-1 (emotional tone)
+  moods       String   @default("[\"neutral\"]")
+  tags        String   @default("[]")
+  decade      String   @default("2020s")  // '70s', '80s', etc.
+  occasions   String   @default("[\"chill\"]")
+  
+  // Play count for recommendations
+  playCount   Int      @default(0)
+
+  likedBy     LikedSong[]
+  inPlaylists PlaylistSong[]
+  sessions    ListeningSession[]
+
+  @@map("songs")
+}
+
+model Playlist {
+  id              String    @id @default(cuid())
+  name            String
+  description     String?
+  coverUrl        String?
+  isPublic        Boolean   @default(true)
+  isCollaborative Boolean   @default(false)
+  isLikedSongs    Boolean   @default(false)
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  owner           User      @relation(fields: [ownerId], references: [id])
+  ownerId         String
+  songs           PlaylistSong[]
+
+  @@map("playlists")
+}
+
+model PlaylistSong {
+  id          String    @id @default(cuid())
+  addedAt     DateTime  @default(now())
+  position    Int       @default(0)
+
+  playlist    Playlist  @relation(fields: [playlistId], references: [id], onDelete: Cascade)
+  playlistId  String
+  song        Song      @relation(fields: [songId], references: [id], onDelete: Cascade)
+  songId      String
+
+  @@unique([playlistId, songId])
+  @@map("playlist_songs")
+}
+
+model LikedSong {
+  id        String    @id @default(cuid())
+  addedAt   DateTime  @default(now())
+
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String
+  song      Song      @relation(fields: [songId], references: [id], onDelete: Cascade)
+  songId    String
+
+  @@unique([userId, songId])
+  @@map("liked_songs")
+}
+
+model ArtistFollow {
+  id        String    @id @default(cuid())
+  createdAt DateTime  @default(now())
+
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String
+  artist    Artist    @relation(fields: [artistId], references: [id], onDelete: Cascade)
+  artistId  String
+
+  @@unique([userId, artistId])
+  @@map("artist_follows")
+}
+
+// AI: Listening session tracking
+model ListeningSession {
+  id          String    @id @default(cuid())
+  createdAt   DateTime  @default(now())
+  
+  user        User      @relation(fields: [userId], references: [id])
+  userId      String
+  song        Song      @relation(fields: [songId], references: [id])
+  songId      String
+  
+  // Session data
+  action      String    // 'play', 'skip', 'complete', 'like'
+  durationListened Int  @default(0)  // seconds listened
+  skipReason  String?   // 'bored', 'wrong-song', 'interrupt'
+  
+  @@index([userId])
+  @@index([songId])
+  @@map("listening_sessions")
+}
+
+// AI: Generated Smart Playlists
+model SmartPlaylist {
+  id            String    @id @default(cuid())
+  name          String
+  description   String?
+  type          String    // 'made-for-you', 'mood', 'discover', 'time-capsule'
+  reason        String?   // Why this playlist was generated
+  isPublic      Boolean   @default(true)
+  createdAt     DateTime  @default(now())
+  
+  owner         User      @relation(fields: [ownerId], references: [id])
+  ownerId       String
+  
+  // Regenerate flag
+  needsRefresh  Boolean   @default(true)
+  
+  @@map("smart_playlists")
+}
