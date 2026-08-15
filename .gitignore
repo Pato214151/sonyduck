@@ -1,0 +1,33 @@
+# Dependencias
+node_modules/
+
+# Builds
+dist/
+build/
+
+# Entorno y secretos
+.env
+.env.*
+!.env.example
+
+# Base de datos local
+*.db
+*.db-journal
+prisma/dev.db
+
+# Archivos subidos en runtime
+uploads/
+
+# Logs
+*.log
+
+# Configuración local de editor/herramientas
+.claude/settings.local.json
+.claude/launch.json
+.vscode/
+.idea/
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+*.local
