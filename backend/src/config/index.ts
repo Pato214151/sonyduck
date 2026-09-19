@@ -1,3 +1,8 @@
+/**
+ * Configuración del backend leída de variables de entorno (.env),
+ * con valores por defecto para desarrollo.
+ */
+
 import dotenv from 'dotenv';
 
 dotenv.config();

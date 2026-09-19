@@ -1,3 +1,8 @@
+/**
+ * Límites de peticiones por IP (express-rate-limit) para frenar abusos:
+ * general, login/registro, cambios de contraseña y endpoints de IA.
+ */
+
 import rateLimit from 'express-rate-limit';
 
 // General API rate limiter

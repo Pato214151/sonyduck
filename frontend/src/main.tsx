@@ -1,3 +1,5 @@
+/** Punto de entrada del frontend: monta <App /> en el div#root de index.html. */
+
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App'

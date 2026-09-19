@@ -1,3 +1,8 @@
+/**
+ * Limpieza de la entrada del usuario: escapa texto libre (name, description,
+ * title), recorta búsquedas y rechaza cuerpos de más de 10 KB.
+ */
+
 import { Request, Response, NextFunction } from 'express';
 import validator from 'validator';
 import { AuthRequest } from './auth.js';

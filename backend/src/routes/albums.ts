@@ -1,3 +1,8 @@
+/**
+ * Rutas /api/albums: listar (con paginación), ver un álbum con sus canciones
+ * y buscar. La lógica vive en services/album.service.ts.
+ */
+
 import { Router } from 'express';
 import { paginationSchema } from '../utils/validation.js';
 import { catchAsync, AppError } from '../middleware/errorHandler.js';

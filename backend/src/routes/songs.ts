@@ -1,3 +1,5 @@
+/** Rutas /api/songs: historial reciente del usuario, listado, detalle y búsqueda. */
+
 import { Router } from 'express';
 import { paginationSchema } from '../utils/validation.js';
 import { catchAsync, AppError } from '../middleware/errorHandler.js';

@@ -1,3 +1,5 @@
+/** Página /artist/:id: perfil del artista, canciones populares y álbumes. */
+
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Play } from 'lucide-react';
@@ -6,6 +8,7 @@ import { api } from '@/lib/api';
 import { usePlayerStore } from '@/stores/playerStore';
 import { formatNumber } from '@/lib/utils';
 
+/** Carga el artista y sus álbumes. */
 export function ArtistPage() {
   const { id } = useParams<{ id: string }>();
   const [artist, setArtist] = useState<any>(null);

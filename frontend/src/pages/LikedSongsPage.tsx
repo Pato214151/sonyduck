@@ -1,9 +1,12 @@
+/** Página /liked: canciones con Me gusta. */
+
 import { useEffect, useState } from 'react';
 import { Play, Heart } from 'lucide-react';
 import { api } from '@/lib/api';
 import { usePlayerStore } from '@/stores/playerStore';
 import { formatDuration } from '@/lib/utils';
 
+/** Lista y reproduce tus Me gusta. */
 export function LikedSongsPage() {
   const [songs, setSongs] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);

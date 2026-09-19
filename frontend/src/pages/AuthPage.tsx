@@ -1,8 +1,11 @@
+/** Pantalla de inicio de sesión / registro (se muestra si no hay sesión). */
+
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Music, Mail, Lock, User, Sparkles, ArrowRight } from 'lucide-react';
 import { useAuthStore } from '@/stores/authStore';
 
+/** Formulario de login o registro según la pestaña elegida. */
 export function AuthPage() {
   const [isLogin, setIsLogin] = useState(true);
   const [formData, setFormData] = useState({ name: '', email: 'demo@sonyduck.com', password: 'Demo1234' });

@@ -1,9 +1,16 @@
+/**
+ * Página a la que vuelve Spotify tras autorizar (/spotify-callback).
+ * Cambia el código por un token, trae tus canciones con Me gusta y las
+ * importa al backend (POST /api/import/spotify).
+ */
+
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Loader2, Check, AlertCircle } from 'lucide-react';
 import { exchangeCodeForToken, fetchLikedTracks } from '@/lib/spotify';
 import { api } from '@/lib/api';
 
+/** Completa el login con Spotify e importa las canciones. */
 export function SpotifyCallback() {
   const navigate = useNavigate();
   const [msg, setMsg] = useState('Conectando con Spotify…');

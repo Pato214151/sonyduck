@@ -9,9 +9,11 @@ const SCOPE = 'user-library-read';
 const CLIENT_ID_KEY = 'spotify_client_id';
 const VERIFIER_KEY = 'spotify_verifier';
 
+/** Client ID de Spotify: el de .env (VITE_SPOTIFY_CLIENT_ID) o el guardado en el navegador. */
 export function getClientId(): string {
   return (import.meta.env.VITE_SPOTIFY_CLIENT_ID as string) || localStorage.getItem(CLIENT_ID_KEY) || '';
 }
+/** Guarda el Client ID de Spotify en el navegador. */
 export function setClientId(id: string) {
   localStorage.setItem(CLIENT_ID_KEY, id.trim());
 }
@@ -25,15 +27,18 @@ export interface ImportTrack {
   spotifyId: string;
 }
 
+/** Texto aleatorio para el verificador PKCE. */
 function randomString(len: number): string {
   const arr = crypto.getRandomValues(new Uint8Array(len));
   return Array.from(arr, (b) => ('0' + (b & 0xff).toString(16)).slice(-2)).join('');
 }
 
+/** Hash SHA-256 (para el challenge PKCE). */
 async function sha256(plain: string): Promise<ArrayBuffer> {
   return crypto.subtle.digest('SHA-256', new TextEncoder().encode(plain));
 }
 
+/** Codifica bytes en base64 apto para URL. */
 function base64url(buf: ArrayBuffer): string {
   return btoa(String.fromCharCode(...new Uint8Array(buf)))
     .replace(/\+/g, '-')

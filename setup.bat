@@ -1,4 +1,6 @@
 @echo off
+REM Instalación inicial en Windows (doble clic): instala dependencias,
+REM crea la base SQLite y la llena con datos de ejemplo.
 chcp 65001 > nul
 title SonYDuck - Setup
 

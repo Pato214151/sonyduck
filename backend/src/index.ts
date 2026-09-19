@@ -1,3 +1,16 @@
+/**
+ * Servidor de la API de SonYDuck (Express).
+ *
+ * Orden de los middlewares (importa):
+ *   1. Cabeceras de seguridad (Helmet) y CORS solo para el frontend
+ *   2. Límite general de peticiones
+ *   3. Rutas con cuerpos grandes (subida de MP3 e importación), ANTES del
+ *      límite de 10 KB del JSON normal
+ *   4. Parseo de JSON (máx. 10 KB) y sanitización de body/query
+ *   5. Rutas /api/* (auth con un límite más estricto)
+ *   6. 404 y manejador de errores al final
+ */
+
 import express from 'express';
 import cors from 'cors';
 import { config } from './config/index.js';

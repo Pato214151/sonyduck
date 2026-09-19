@@ -1,3 +1,5 @@
+/** Página /playlist/:id: detalle y canciones de una playlist. */
+
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Play } from 'lucide-react';
@@ -5,6 +7,7 @@ import { api } from '@/lib/api';
 import { usePlayerStore } from '@/stores/playerStore';
 import { formatDuration } from '@/lib/utils';
 
+/** Carga y reproduce una playlist. */
 export function PlaylistPage() {
   const { id } = useParams<{ id: string }>();
   const [playlist, setPlaylist] = useState<any>(null);

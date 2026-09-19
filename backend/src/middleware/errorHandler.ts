@@ -1,5 +1,11 @@
+/**
+ * Manejo centralizado de errores.
+ * Toda respuesta de error sale con el formato { success: false, error: { code, message } }.
+ */
+
 import { Request, Response, NextFunction } from 'express';
 
+/** Error "esperado" con código HTTP y código propio (ej: 404 NOT_FOUND). */
 export class AppError extends Error {
   statusCode: number;
   code: string;
@@ -15,6 +21,10 @@ export class AppError extends Error {
   }
 }
 
+/**
+ * Convierte cualquier error en una respuesta JSON. Los errores de Prisma por
+ * valor duplicado (P2002) salen como 409; lo demás como 500.
+ */
 export const errorHandler = (
   err: Error | AppError,
   req: Request,
@@ -59,6 +69,7 @@ export const errorHandler = (
   });
 };
 
+/** Envuelve un handler async para que sus errores lleguen a errorHandler. */
 export const catchAsync = (fn: Function) => {
   return (req: Request, res: Response, next: NextFunction) => {
     Promise.resolve(fn(req, res, next)).catch(next);

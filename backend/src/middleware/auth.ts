@@ -1,3 +1,9 @@
+/**
+ * Middlewares de autenticación con JWT (header `Authorization: Bearer <token>`).
+ *   - authenticate: exige un token válido y deja el id en req.userId
+ *   - optionalAuth: si hay token lo usa; si no, sigue como anónimo
+ */
+
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 import { prisma } from '../lib/prisma.js';

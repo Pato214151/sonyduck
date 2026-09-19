@@ -1,3 +1,9 @@
+/**
+ * Cliente único de Prisma (acceso a la base de datos).
+ * En desarrollo se guarda en `global` para que el hot-reload no abra
+ * conexiones nuevas cada vez que cambia un archivo.
+ */
+
 import { PrismaClient } from '@prisma/client';
 
 declare global {

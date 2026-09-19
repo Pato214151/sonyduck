@@ -1,3 +1,5 @@
+/** Página de inicio: álbumes, artistas y canciones destacadas. */
+
 import { useEffect, useState } from 'react';
 import { Play } from 'lucide-react';
 import Link from '@/components/Link';
@@ -6,6 +8,7 @@ import { usePlayerStore } from '@/stores/playerStore';
 import { formatNumber } from '@/lib/utils';
 import type { Song, Album, Artist } from '@/types';
 
+/** Carga en paralelo álbumes, artistas y canciones. */
 export function HomePage() {
   const [albums, setAlbums] = useState<Album[]>([]);
   const [artists, setArtists] = useState<Artist[]>([]);

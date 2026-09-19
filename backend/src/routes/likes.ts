@@ -1,3 +1,8 @@
+/**
+ * Rutas /api/likes: canciones que le gustan al usuario (listar, dar/quitar
+ * like, alternar y consultar). Todas requieren sesión.
+ */
+
 import { Router } from 'express';
 import { catchAsync } from '../middleware/errorHandler.js';
 import { authenticate, AuthRequest } from '../middleware/auth.js';

@@ -1,8 +1,15 @@
+/**
+ * Llena la base de datos con datos de ejemplo: usuario demo
+ * (demo@sonyduck.com / Demo1234), artistas, álbumes, canciones y playlists.
+ * Se corre con: npm run db:seed
+ */
+
 import { PrismaClient } from '@prisma/client';
 import bcrypt from 'bcryptjs';
 
 const prisma = new PrismaClient();
 
+/** Crea (o actualiza) todos los datos de ejemplo. */
 async function main() {
   console.log('🌱 Starting database seed...');
 

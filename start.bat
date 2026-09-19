@@ -1,4 +1,6 @@
 @echo off
+REM Arranque con un clic en Windows: instala lo que falte, crea el .env si no
+REM existe y levanta backend (3001) y frontend (5173).
 chcp 65001 > nul
 title SonYDuck - One-Click Start
 

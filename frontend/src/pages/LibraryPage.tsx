@@ -1,9 +1,12 @@
+/** Página /library: tus playlists, artistas que sigues y el panel de importar música. */
+
 import { useCallback, useEffect, useState } from 'react';
 import { Plus, ListMusic } from 'lucide-react';
 import Link from '@/components/Link';
 import { api } from '@/lib/api';
 import { ImportPanel } from '@/components/ImportPanel';
 
+/** Biblioteca del usuario. */
 export function LibraryPage() {
   const [playlists, setPlaylists] = useState<any[]>([]);
   const [artists, setArtists] = useState<any[]>([]);

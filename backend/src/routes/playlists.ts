@@ -1,3 +1,8 @@
+/**
+ * Rutas /api/playlists: CRUD de playlists y agregar/quitar canciones.
+ * Solo el dueño puede modificar su playlist (lo valida el servicio).
+ */
+
 import { Router } from 'express';
 import { createPlaylistSchema, updatePlaylistSchema, addSongToPlaylistSchema, paginationSchema } from '../utils/validation.js';
 import { catchAsync } from '../middleware/errorHandler.js';

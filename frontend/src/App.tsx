@@ -1,3 +1,9 @@
+/**
+ * Componente raíz. Si no hay sesión muestra AuthPage; si la hay, arma el
+ * layout (Sidebar + TopBar + página actual + PlayerBar) y las rutas.
+ * El <audio> único de la app vive aquí y se registra en el playerStore.
+ */
+
 import { useEffect, useRef } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useAuthStore } from '@/stores/authStore';
@@ -17,6 +23,7 @@ import { LibraryPage } from '@/pages/LibraryPage';
 import { DiscoverPage } from '@/pages/DiscoverPage';
 import { SpotifyCallback } from '@/pages/SpotifyCallback';
 
+/** Layout y rutas; conecta el elemento <audio> con el reproductor. */
 function AppContent() {
   const { isAuthenticated, fetchUser } = useAuthStore();
   const setAudioElement = usePlayerStore((state) => state.setAudioElement);
@@ -70,6 +77,7 @@ function AppContent() {
   );
 }
 
+/** Envuelve todo en el router del navegador. */
 export default function App() {
   return (
     <BrowserRouter>

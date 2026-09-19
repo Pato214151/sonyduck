@@ -1,3 +1,8 @@
+/**
+ * Barra del reproductor fija abajo: canción actual, like, controles,
+ * barra de progreso arrastrable y volumen. Lee y controla el playerStore.
+ */
+
 import { useEffect, useState } from 'react';
 import { Play, Pause, SkipBack, SkipForward, Volume2, VolumeX, Heart, SkipForward as SkipFwd10, SkipBack as SkipBwd10 } from 'lucide-react';
 import { usePlayerStore } from '@/stores/playerStore';
@@ -5,6 +10,7 @@ import { formatDuration } from '@/lib/utils';
 import { cn } from '@/lib/utils';
 import { api } from '@/lib/api';
 
+/** Controles de reproducción de la canción actual. */
 export function PlayerBar() {
   const { currentSong, isPlaying, progress, duration, volume, isMuted, togglePlay, next, previous, seek, setVolume, toggleMute } = usePlayerStore();
   const [isLiked, setIsLiked] = useState(false);

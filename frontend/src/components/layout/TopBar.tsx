@@ -1,9 +1,12 @@
+/** Barra superior: navegación atrás/adelante y menú del usuario (cerrar sesión). */
+
 import { ChevronLeft, ChevronRight, Bell, Settings, User, LogOut } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useAuthStore } from '@/stores/authStore';
 import { cn, getInitials, getRandomGradient } from '@/lib/utils';
 import { useState, useRef, useEffect } from 'react';
 
+/** Barra superior con el menú de la cuenta. */
 export function TopBar() {
   const navigate = useNavigate();
   const logout = useAuthStore((state) => state.logout);

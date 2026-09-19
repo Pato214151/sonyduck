@@ -1,3 +1,10 @@
+/**
+ * Cliente HTTP (axios) hacia el backend.
+ *   - Agrega el token de acceso a cada petición.
+ *   - Si una petición da 401, intenta refrescar el token UNA vez y la repite;
+ *     si el refresco falla, cierra la sesión.
+ */
+
 import axios, { AxiosError, InternalAxiosRequestConfig } from 'axios';
 import { useAuthStore } from '@/stores/authStore';
 

@@ -1,3 +1,8 @@
+/**
+ * Panel para agregar música: subir MP3 propios (arrastrar y soltar) o
+ * conectar Spotify e importar tus canciones con Me gusta.
+ */
+
 import { useRef, useState } from 'react';
 import { Upload, Music, Check, Loader2, AlertCircle } from 'lucide-react';
 import { useAuthStore } from '@/stores/authStore';
@@ -7,6 +12,7 @@ interface Props {
   onImported?: () => void;
 }
 
+/** Lee la duración de un archivo de audio en el navegador antes de subirlo. */
 function getAudioDuration(file: File): Promise<number> {
   return new Promise((resolve) => {
     const a = document.createElement('audio');
@@ -17,6 +23,7 @@ function getAudioDuration(file: File): Promise<number> {
   });
 }
 
+/** Zona de subida de archivos + botón para conectar con Spotify. */
 export function ImportPanel({ onImported }: Props) {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [dragOver, setDragOver] = useState(false);

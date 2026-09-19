@@ -1,3 +1,8 @@
+/**
+ * Utilidades del backend: hash de contraseñas (bcrypt), creación/verificación
+ * de tokens JWT (acceso 15 min, refresco 7 días) y formato de duraciones.
+ */
+
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 

@@ -1,3 +1,12 @@
+/**
+ * Estado global del reproductor (zustand).
+ *
+ * Controla el único <audio> de la app: canción actual, cola, progreso,
+ * volumen, aleatorio y repetir (off → all → one). Las páginas solo llaman
+ * a playSong(cancion, cola) y el resto (siguiente, anterior, fin de canción)
+ * se maneja aquí.
+ */
+
 import { create } from 'zustand';
 import type { Song, RepeatMode } from '@/types';
 import { shuffleArray } from '@/lib/utils';

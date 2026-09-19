@@ -1,3 +1,8 @@
+/**
+ * Cabeceras HTTP de seguridad con Helmet (CSP, HSTS, anti-clickjacking,
+ * no-sniff, referrer policy).
+ */
+
 import helmet from 'helmet';
 
 // Enhanced security headers with Helmet

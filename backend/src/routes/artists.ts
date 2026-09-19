@@ -1,3 +1,8 @@
+/**
+ * Rutas /api/artists: listar, perfil, top canciones, discografía, búsqueda
+ * y seguir / dejar de seguir artistas.
+ */
+
 import { Router } from 'express';
 import { paginationSchema } from '../utils/validation.js';
 import { catchAsync, AppError } from '../middleware/errorHandler.js';

@@ -1,3 +1,5 @@
+/** Página /album/:id: portada, datos y canciones del álbum. */
+
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Play, Heart } from 'lucide-react';
@@ -6,6 +8,7 @@ import { api } from '@/lib/api';
 import { usePlayerStore } from '@/stores/playerStore';
 import { formatDuration } from '@/lib/utils';
 
+/** Carga el álbum y permite reproducirlo. */
 export function AlbumPage() {
   const { id } = useParams<{ id: string }>();
   const [album, setAlbum] = useState<any>(null);

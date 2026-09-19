@@ -1,9 +1,12 @@
+/** Página /search: busca canciones, artistas y álbumes a la vez. */
+
 import { useEffect, useState } from 'react';
 import { Search as SearchIcon } from 'lucide-react';
 import Link from '@/components/Link';
 import { api } from '@/lib/api';
 import { usePlayerStore } from '@/stores/playerStore';
 
+/** Búsqueda con los resultados agrupados por tipo. */
 export function SearchPage() {
   const [query, setQuery] = useState('');
   const [songs, setSongs] = useState<any[]>([]);

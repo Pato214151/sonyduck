@@ -1,3 +1,8 @@
+/**
+ * Rutas /api/users: perfil público, editar el propio perfil y playlists públicas
+ * de un usuario.
+ */
+
 import { Router } from 'express';
 import { updateUserSchema, paginationSchema } from '../utils/validation.js';
 import { catchAsync, AppError } from '../middleware/errorHandler.js';

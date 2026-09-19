@@ -1,3 +1,5 @@
+/** Barra lateral: navegación principal y lista de playlists del usuario. */
+
 import { useState, useEffect } from 'react';
 import { Home, Search, Library, Plus, Heart, Music, ChevronRight, Sparkles } from 'lucide-react';
 import { useLocation } from 'react-router-dom';
@@ -11,6 +13,7 @@ const navItems = [
   { icon: Search, label: 'Search', path: '/search' },
 ];
 
+/** Menú de navegación y playlists. */
 export function Sidebar() {
   const location = useLocation();
   const user = useAuthStore((state) => state.user);

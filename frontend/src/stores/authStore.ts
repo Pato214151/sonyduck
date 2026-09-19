@@ -1,3 +1,8 @@
+/**
+ * Estado global de la sesión (zustand), guardado en localStorage.
+ * Tiene el usuario, los tokens y las acciones login, register, logout y fetchUser.
+ */
+
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import type { User } from '@/types';

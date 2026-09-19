@@ -1,3 +1,5 @@
+/** Configuración de Vite: alias `@` → src/ y proxy de /api al backend (puerto 3001). */
+
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import path from 'path'

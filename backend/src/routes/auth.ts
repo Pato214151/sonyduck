@@ -1,3 +1,8 @@
+/**
+ * Rutas /api/auth: registro, login, refresco de token, logout y usuario actual.
+ * Valida con zod (utils/validation.ts) y delega en services/auth.service.ts.
+ */
+
 import { Router } from 'express';
 import { registerSchema, loginSchema } from '../utils/validation.js';
 import { catchAsync } from '../middleware/errorHandler.js';

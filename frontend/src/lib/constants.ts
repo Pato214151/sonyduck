@@ -1,3 +1,5 @@
+/** Constantes del frontend: URL de la API, rutas y atajos de teclado. */
+
 export const API_URL = import.meta.env.VITE_API_URL || '/api';
 
 export const ROUTES = {

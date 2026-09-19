@@ -1,3 +1,8 @@
+/**
+ * Esquemas zod que validan el cuerpo y la query de las peticiones
+ * (registro, login, perfil, playlists, paginación).
+ */
+
 import { z } from 'zod';
 
 export const registerSchema = z.object({

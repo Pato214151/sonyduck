@@ -1,3 +1,8 @@
+/**
+ * Página /discover: elige un estado de ánimo y la IA recomienda canciones
+ * (GET /api/ai/mood/:mood/songs).
+ */
+
 import { useState } from 'react';
 import { Sparkles, Sun, CloudRain, Brain, Zap, Coffee, Heart, Moon, Play } from 'lucide-react';
 import { api } from '@/lib/api';
@@ -14,6 +19,7 @@ const moods = [
   { id: 'epic', name: 'Epica', icon: Sparkles, color: 'text-fuchsia-400', gradient: 'from-fuchsia-500/20 to-purple-500/20' },
 ];
 
+/** Selector de ánimo + recomendaciones. */
 export function DiscoverPage() {
   const [selectedMood, setSelectedMood] = useState<string | null>(null);
   const [recommendations, setRecommendations] = useState<any[]>([]);
