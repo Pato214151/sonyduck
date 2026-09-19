@@ -22,8 +22,6 @@ uploads/
 *.log
 
 # Configuración local de editor/herramientas
-.claude/settings.local.json
-.claude/launch.json
 .vscode/
 .idea/
 
@@ -31,3 +29,6 @@ uploads/
 .DS_Store
 Thumbs.db
 *.local
+
+.claude/
+CLAUDE.md
