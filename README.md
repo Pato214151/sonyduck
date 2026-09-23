@@ -129,3 +129,24 @@ Ver `docs/SECURITY.md` para más detalles.
 ---
 
 Hecho con ❤️ por el equipo de SonYDuck
+
+---
+
+## Lo que salió mal (y cómo lo arreglé)
+
+> Este es mi proyecto de práctica con TypeScript de punta a punta. La idea inicial era ambiciosa: traer mis canciones de Spotify y tenerlas en mi propia app.
+
+**Spotify no me respondía.**
+Conectar con Spotify fue lo primero que se trabó. Terminé usando el flujo OAuth PKCE, que es el que Spotify recomienda para apps que corren en el navegador: no necesita guardar un *client secret* en el frontend, donde cualquiera lo podría ver. Para que funcione, la URL de regreso tiene que ser exactamente igual a la registrada en el panel de Spotify, así que la app muestra cuál copiar.
+
+**Quería descargar mis "Me gusta" y no se puede.**
+Mi plan era leer mis canciones con "Me gusta" y descargarlas para tenerlas ahí. Ya conectado, descubrí que la API de Spotify solo entrega los datos de la canción (título, artista, álbum, portada, duración), nunca el audio. El audio está protegido y descargarlo va contra sus términos.
+
+**Tampoco las podía convertir.**
+Intenté convertirlas a MP3 y tampoco hubo forma, por la misma razón: no hay un archivo que convertir. Así que cambié el enfoque:
+- La app importa los datos de hasta 2.000 canciones a tu lista de "Me gusta", sin duplicar artistas, álbumes ni canciones.
+- Mientras tanto suena un audio de demostración con licencia libre.
+- Si quieres la canción real, subes tu propio MP3 (el servidor solo acepta archivos de audio).
+
+**Lo que aprendí.**
+Antes de diseñar una función alrededor de una API, hay que leer qué permite y qué no. Me habría ahorrado días.
