@@ -27,10 +27,39 @@ router.get('/', catchAsync(async (req, res) => {
   });
 }));
 
+// Search artists
+// OJO: '/search' y '/following' van ANTES de '/:id'. Express prueba las rutas
+// en orden, así que si '/:id' estuviera primero tomaría "search" o "following"
+// como si fueran el id de un artista.
+router.get('/search', catchAsync(async (req, res) => {
+  const { q, limit = 20 } = req.query;
+
+  if (!q || typeof q !== 'string') {
+    throw new AppError('Search query is required', 400, 'VALIDATION_ERROR');
+  }
+
+  const result = await artistService.getArtists({ search: q, limit: Number(limit) });
+
+  res.json({
+    success: true,
+    data: { artists: result.artists },
+  });
+}));
+
+// Get followed artists
+router.get('/following', authenticate, catchAsync(async (req: AuthRequest, res) => {
+  const artists = await artistService.getFollowedArtists(req.userId!);
+
+  res.json({
+    success: true,
+    data: { artists },
+  });
+}));
+
 // Get single artist with full profile
 router.get('/:id', optionalAuth, catchAsync(async (req: AuthRequest, res) => {
   const { id } = req.params;
-  
+
   const artist = await artistService.getArtistById(id, req.userId);
   const isFollowing = req.userId ? await artistService.isFollowing(id, req.userId) : false;
   
@@ -72,22 +101,6 @@ router.get('/:id/albums', catchAsync(async (req, res) => {
   });
 }));
 
-// Search artists
-router.get('/search', catchAsync(async (req, res) => {
-  const { q, limit = 20 } = req.query;
-  
-  if (!q || typeof q !== 'string') {
-    throw new AppError('Search query is required', 400, 'VALIDATION_ERROR');
-  }
-  
-  const result = await artistService.getArtists({ search: q, limit: Number(limit) });
-  
-  res.json({
-    success: true,
-    data: { artists: result.artists },
-  });
-}));
-
 // Follow an artist
 router.post('/:id/follow', authenticate, catchAsync(async (req: AuthRequest, res) => {
   const { id } = req.params;
@@ -117,16 +130,6 @@ router.delete('/:id/follow', authenticate, catchAsync(async (req: AuthRequest, r
   res.json({
     success: true,
     message: 'Artist unfollowed successfully',
-  });
-}));
-
-// Get followed artists
-router.get('/following', authenticate, catchAsync(async (req: AuthRequest, res) => {
-  const artists = await artistService.getFollowedArtists(req.userId!);
-  
-  res.json({
-    success: true,
-    data: { artists },
   });
 }));
 

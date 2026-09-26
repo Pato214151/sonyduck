@@ -47,7 +47,8 @@ export class ArtistService {
     const { limit = 20, offset = 0, search } = options;
 
     const where: Record<string, unknown> = {};
-    if (search) where.name = { contains: search, mode: 'insensitive' as const };
+    // SQLite no admite `mode: 'insensitive'` en Prisma; `contains` ya ignora mayúsculas.
+    if (search) where.name = { contains: search };
 
     const [artists, total] = await Promise.all([
       prisma.artist.findMany({

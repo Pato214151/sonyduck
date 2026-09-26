@@ -69,19 +69,9 @@ router.get('/', optionalAuth, catchAsync(async (req: AuthRequest, res) => {
   });
 }));
 
-// Get single song
-router.get('/:id', optionalAuth, catchAsync(async (req: AuthRequest, res) => {
-  const { id } = req.params;
-  
-  const song = await songService.getSongById(id, req.userId);
-  
-  res.json({
-    success: true,
-    data: song,
-  });
-}));
-
 // Search songs
+// OJO: va ANTES de '/:id'. Express prueba las rutas en orden, así que si
+// '/:id' estuviera primero tomaría "search" como si fuera un id de canción.
 router.get('/search', optionalAuth, catchAsync(async (req: AuthRequest, res) => {
   const { q, limit = 20 } = req.query;
   
@@ -100,6 +90,18 @@ router.get('/search', optionalAuth, catchAsync(async (req: AuthRequest, res) => 
     data: {
       songs: result.songs,
     },
+  });
+}));
+
+// Get single song
+router.get('/:id', optionalAuth, catchAsync(async (req: AuthRequest, res) => {
+  const { id } = req.params;
+
+  const song = await songService.getSongById(id, req.userId);
+
+  res.json({
+    success: true,
+    data: song,
   });
 }));
 

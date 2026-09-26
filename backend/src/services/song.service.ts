@@ -48,7 +48,9 @@ export class SongService {
     
     if (artistId) where.artistId = artistId;
     if (albumId) where.albumId = albumId;
-    if (search) where.title = { contains: search, mode: 'insensitive' as const };
+    // SQLite no admite `mode: 'insensitive'` en Prisma (revienta la consulta).
+    // No hace falta: con SQLite, `contains` ya ignora mayúsculas/minúsculas en ASCII.
+    if (search) where.title = { contains: search };
 
     const [songs, total] = await Promise.all([
       prisma.song.findMany({
